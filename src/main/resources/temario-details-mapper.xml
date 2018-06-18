@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tote.gestion.gestionasignaturas.DAO.TemarioDetailsDAO">
+    <select id="addTemario">
+        insert into temario values (#{id},#{idCurso},#{nombre},#{file})
+    </select>
+    
+    <select id="getTemario" resultType="com.tote.gestion.gestionasignaturas.model.Temario">
+        select id,id_curso,nombre,fichero from temario where id_curso = #{idTemario} limit 1
+    </select>
+    
+    <delete id="deleteTemario">
+        delete from temario where id_curso = #{idCurso}
+    </delete>
+</mapper>

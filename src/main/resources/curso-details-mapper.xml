@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tote.gestion.gestionasignaturas.DAO.CursoDetailsDAO">
+
+    <select id="getAllCursos" resultType="com.tote.gestion.gestionasignaturas.model.Curso">
+        select C.id, C.titulo, N.nivel ,C.horas, C.activo from curso_v2 C 
+        left outer join nivel N on C.id_nivel = N.id;
+    </select>
+
+    <select id="getCurso" parameterType="java.lang.Integer"
+            resultType="com.tote.gestion.gestionasignaturas.model.Curso">
+        select * from curso where id=#{id}
+    </select>
+    
+    <insert id="addCurso" parameterType="com.tote.gestion.gestionasignaturas.model.CursoV2">
+        insert into curso_v2 value (#{id},#{titulo},#{horas},#{activo},#{nivel.id});
+    </insert>
+    
+    <insert id="addCursoImparte">
+        insert into profesor_imparte_curso value (#{id_profesor},#{id_curso});
+    </insert>
+     
+    <select id="getCursosAcctivos" resultType="com.tote.gestion.gestionasignaturas.model.Curso">
+        select C.id, C.titulo, N.nivel ,C.horas, C.activo from curso_v2 C 
+        left outer join nivel N on C.id_nivel = N.id
+        where C.activo = 1;
+    </select>
+     
+</mapper>
